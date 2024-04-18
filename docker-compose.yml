@@ -1,0 +1,27 @@
+version: "3.8"
+
+services:
+  postgres:
+    container_name: livraria-postgres-db
+    image: postgres:latest
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./db/postgres:/var/lib/postgresql/data
+      - ./config/postgres-seed.sql:/docker-entrypoint-initdb.d/init.sql
+  mongodb:
+    container_name: livraria-mongodb-db
+    image: mongo:latest
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_INITDB_ROOT_USERNAME}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_INITDB_ROOT_PASSWORD}
+      MONGO_INITDB_DATABASE: livraria
+    ports:
+      - 27017:27017
+    volumes:
+      - "./db/mongo:/data/db"
+      - ./config/mongo-seed.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
