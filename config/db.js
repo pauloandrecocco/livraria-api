@@ -18,14 +18,9 @@ const sequelize = new Sequelize(
 
 // MongoDB
 async function connectMongodb() {
-  const mongoDBUrl = "mongodb://localhost:27017/livraria";
+  const mongoDBUrl = `mongodb://${process.env.MONGO_INITDB_ROOT_USERNAME}:${process.env.MONGO_INITDB_ROOT_PASSWORD}@localhost:27017/livraria?authSource=admin`;
 
-  return await mongoose.connect(mongoDBUrl, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    user: process.env.MONGO_INITDB_ROOT_USERNAME,
-    pass: process.env.MONGO_INITDB_ROOT_PASSWORD,
-  });
+  return await mongoose.connect(mongoDBUrl);
 }
 
 export { sequelize, connectMongodb };

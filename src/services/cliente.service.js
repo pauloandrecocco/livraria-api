@@ -1,6 +1,9 @@
 // Repositories
 import ClienteRepository from "../repositories/cliente.repository.js";
 
+// Utils
+import { errorHandler } from "../utils/error-handler.js";
+
 async function createCliente(cliente) {
   return await ClienteRepository.insertCliente(cliente);
 }

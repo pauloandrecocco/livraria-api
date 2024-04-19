@@ -1,6 +1,6 @@
-db.createCollection("livroInfo");
+db.createCollection("infoLivros");
 
-db.livroInfo.insertMany([
+db.infoLivros.insertMany([
   {
     livroId: 1,
     descricao:

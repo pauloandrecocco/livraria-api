@@ -6,6 +6,7 @@ import cors from "cors";
 // Routers
 import autorRouter from "./src/routes/autor.route.js";
 import clienteRouter from "./src/routes/cliente.route.js";
+import livroRouter from "./src/routes/livro.route.js";
 
 const { combine, timestamp, label, printf } = winston.format;
 const logFormat = printf(({ level, message, label, timestamp }) => {
@@ -32,6 +33,7 @@ app.use(cors());
 
 app.use("/autores", autorRouter);
 app.use("/clientes", clienteRouter);
+app.use("/livros", livroRouter);
 
 app.listen(3000, async () => {
   logger.info("API rodando na porta 3000.");
