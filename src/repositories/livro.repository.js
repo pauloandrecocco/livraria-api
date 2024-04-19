@@ -107,6 +107,49 @@ async function getInfoLivroByLivroId(livroId) {
   }
 }
 
+async function createInfoLivro(infoLivro) {
+  try {
+    if (await getInfoLivroByLivroId(infoLivro.livroId)) return;
+
+    const mongoose = await connectMongodb();
+
+    const InfoLivro = mongoose.model("InfoLivro", InfoLivroSchema);
+
+    infoLivro = new InfoLivro(infoLivro);
+    await infoLivro.save();
+
+    return await getLivro(infoLivro.livroId);
+  } catch (err) {
+    throw err;
+    // const error = errorHandler(500, err.message);
+    //throw error;
+  }
+}
+
+async function updateInfoLivro(infoLivro) {
+  try {
+    if (!(await getInfoLivroByLivroId(infoLivro.livroId))) return;
+
+    const mongoose = await connectMongodb();
+
+    const InfoLivro = mongoose.model("InfoLivro", InfoLivroSchema);
+
+    infoLivro = await InfoLivro.findOneAndUpdate(
+      { livroId: infoLivro.livroId },
+      infoLivro,
+      {
+        returnOriginal: false,
+      }
+    );
+
+    return await getLivro(infoLivro.livroId);
+  } catch (err) {
+    throw err;
+    // const error = errorHandler(500, err.message);
+    //throw error;
+  }
+}
+
 export default {
   insertLivro,
   listLivros,
@@ -114,4 +157,6 @@ export default {
   deleteLivro,
   updateLivro,
   listLivrosByAutorId,
+  createInfoLivro,
+  updateInfoLivro,
 };

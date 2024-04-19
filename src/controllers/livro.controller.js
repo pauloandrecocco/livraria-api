@@ -2,7 +2,7 @@
 import LivroService from "../services/livro.service.js";
 
 // Utils
-// import { validateId, validateLivro } from "../utils/validators.js";
+// import { validateId, validateLivro, validateInfoLivro } from "../utils/validators.js";
 
 async function createLivro(req, res, next) {
   const livro = req.body;
@@ -70,10 +70,41 @@ async function updateLivro(req, res, next) {
   }
 }
 
+async function addInfoLivro(req, res, next) {
+  const { livroId } = req.params;
+  const infoLivro = req.body;
+
+  try {
+    // validateId(livroId, "Livro");
+    // validateInfoLivro(infoLivro);
+
+    res.send(await LivroService.addInfoLivro(livroId, infoLivro));
+    logger.info(`${req.method} ${req.baseUrl} - Success`);
+  } catch (err) {
+    next(err);
+  }
+}
+
+async function updateInfoLivro(req, res, next) {
+  const { livroId } = req.params;
+  const infoLivro = req.body;
+
+  try {
+    // validateId(livroId, "Livro");
+
+    res.send(await LivroService.updateInfoLivro(livroId, infoLivro));
+    logger.info(`${req.method} ${req.baseUrl} - Success`);
+  } catch (err) {
+    next(err);
+  }
+}
+
 export default {
   createLivro,
   listLivros,
   getLivro,
   deleteLivro,
   updateLivro,
+  addInfoLivro,
+  updateInfoLivro,
 };

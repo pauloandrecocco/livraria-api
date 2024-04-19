@@ -45,10 +45,20 @@ async function updateLivro(livroId, livro) {
   return await LivroRepository.updateLivro(livroId, camposAtualizados);
 }
 
+async function addInfoLivro(livroId, infoLivro) {
+  return await LivroRepository.createInfoLivro({ livroId, ...infoLivro });
+}
+
+async function updateInfoLivro(livroId, infoLivro) {
+  return await LivroRepository.updateInfoLivro({ livroId, ...infoLivro });
+}
+
 export default {
   createLivro,
   listLivros,
   getLivro,
   deleteLivro,
   updateLivro,
+  addInfoLivro,
+  updateInfoLivro,
 };
