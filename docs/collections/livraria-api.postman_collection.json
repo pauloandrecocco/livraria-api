@@ -433,6 +433,79 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Deletar Informações",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/livros/7/info",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"livros",
+								"7",
+								"info"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Cadastrar avaliação",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"José da Silva\",\r\n    \"nota\": 5,\r\n    \"avaliacao\": \"Gostei muito do livro.\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/livros/7/avaliacoes",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"livros",
+								"7",
+								"avaliacoes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Deletar avaliação",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/livros/7/avaliacoes/0",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"livros",
+								"7",
+								"avaliacoes",
+								"0"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		}

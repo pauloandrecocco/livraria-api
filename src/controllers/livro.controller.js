@@ -2,7 +2,7 @@
 import LivroService from "../services/livro.service.js";
 
 // Utils
-// import { validateId, validateLivro, validateInfoLivro } from "../utils/validators.js";
+// import { validateId, validateLivro, validateInfoLivro, validateAvaliacaoLivro } from "../utils/validators.js";
 
 async function createLivro(req, res, next) {
   const livro = req.body;
@@ -85,6 +85,21 @@ async function addInfoLivro(req, res, next) {
   }
 }
 
+async function deleteInfoLivro(req, res, next) {
+  const { livroId } = req.params;
+
+  try {
+    // validateId(livroId, "Livro");
+
+    await LivroService.deleteInfoLivro(livroId);
+
+    res.end();
+    logger.info(`${req.method} ${req.baseUrl}/:id - Success`);
+  } catch (err) {
+    next(err);
+  }
+}
+
 async function updateInfoLivro(req, res, next) {
   const { livroId } = req.params;
   const infoLivro = req.body;
@@ -99,6 +114,36 @@ async function updateInfoLivro(req, res, next) {
   }
 }
 
+async function addAvaliacaoLivro(req, res, next) {
+  const { livroId } = req.params;
+  const avaliacaoLivro = req.body;
+
+  try {
+    // validateId(livroId, "Livro");
+    // validateAvaliacaoLivro(avaliacaoLivro);
+
+    res.send(await LivroService.addAvaliacaoLivro(livroId, avaliacaoLivro));
+    logger.info(`${req.method} ${req.baseUrl} - Success`);
+  } catch (err) {
+    next(err);
+  }
+}
+
+async function deleteAvaliacaoLivro(req, res, next) {
+  const { livroId, index } = req.params;
+
+  try {
+    // validateId(livroId, "Livro");
+
+    await LivroService.deleteAvaliacaoLivro(livroId, index);
+
+    res.end();
+    logger.info(`${req.method} ${req.baseUrl}/:id - Success`);
+  } catch (err) {
+    next(err);
+  }
+}
+
 export default {
   createLivro,
   listLivros,
@@ -106,5 +151,8 @@ export default {
   deleteLivro,
   updateLivro,
   addInfoLivro,
+  deleteInfoLivro,
   updateInfoLivro,
+  addAvaliacaoLivro,
+  deleteAvaliacaoLivro,
 };

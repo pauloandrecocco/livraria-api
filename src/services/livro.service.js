@@ -49,8 +49,20 @@ async function addInfoLivro(livroId, infoLivro) {
   return await LivroRepository.createInfoLivro({ livroId, ...infoLivro });
 }
 
+async function deleteInfoLivro(livroId) {
+  return await LivroRepository.deleteInfoLivro(livroId);
+}
+
 async function updateInfoLivro(livroId, infoLivro) {
   return await LivroRepository.updateInfoLivro({ livroId, ...infoLivro });
+}
+
+async function addAvaliacaoLivro(livroId, avaliacaoLivro) {
+  return await LivroRepository.createAvaliacaoLivro(livroId, avaliacaoLivro);
+}
+
+async function deleteAvaliacaoLivro(livroId, index) {
+  return await LivroRepository.deleteAvaliacaoLivro(livroId, index);
 }
 
 export default {
@@ -60,5 +72,8 @@ export default {
   deleteLivro,
   updateLivro,
   addInfoLivro,
+  deleteInfoLivro,
   updateInfoLivro,
+  addAvaliacaoLivro,
+  deleteAvaliacaoLivro,
 };

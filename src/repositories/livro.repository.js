@@ -126,6 +126,22 @@ async function createInfoLivro(infoLivro) {
   }
 }
 
+async function deleteInfoLivro(livroId) {
+  try {
+    const mongoose = await connectMongodb();
+
+    const InfoLivro = mongoose.model("InfoLivro", InfoLivroSchema);
+
+    await InfoLivro.deleteOne({ livroId });
+
+    return;
+  } catch (err) {
+    throw err;
+    // const error = errorHandler(500, err.message);
+    //throw error;
+  }
+}
+
 async function updateInfoLivro(infoLivro) {
   try {
     if (!(await getInfoLivroByLivroId(infoLivro.livroId))) return;
@@ -150,6 +166,38 @@ async function updateInfoLivro(infoLivro) {
   }
 }
 
+async function createAvaliacaoLivro(livroId, avaliacaoLivro) {
+  try {
+    const infoLivro = await getInfoLivroByLivroId(livroId);
+
+    if (!infoLivro) return;
+
+    infoLivro.avaliacoes.push(avaliacaoLivro);
+
+    return await updateInfoLivro({ livroId, ...infoLivro });
+  } catch (err) {
+    throw err;
+    // const error = errorHandler(500, err.message);
+    //throw error;
+  }
+}
+
+async function deleteAvaliacaoLivro(livroId, index) {
+  try {
+    const infoLivro = await getInfoLivroByLivroId(livroId);
+
+    if (!infoLivro) return;
+
+    infoLivro.avaliacoes.splice(index, 1);
+
+    await updateInfoLivro({ livroId, ...infoLivro });
+  } catch (err) {
+    throw err;
+    // const error = errorHandler(500, err.message);
+    //throw error;
+  }
+}
+
 export default {
   insertLivro,
   listLivros,
@@ -158,5 +206,8 @@ export default {
   updateLivro,
   listLivrosByAutorId,
   createInfoLivro,
+  deleteInfoLivro,
   updateInfoLivro,
+  createAvaliacaoLivro,
+  deleteAvaliacaoLivro,
 };

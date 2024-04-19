@@ -13,7 +13,13 @@ router.delete("/:livroId", LivroController.deleteLivro);
 router.put("/:livroId", LivroController.updateLivro);
 // InfoLivro
 router.post("/:livroId/info", LivroController.addInfoLivro);
+router.delete("/:livroId/info", LivroController.deleteInfoLivro);
 router.put("/:livroId/info", LivroController.updateInfoLivro);
+router.post("/:livroId/avaliacoes", LivroController.addAvaliacaoLivro);
+router.delete(
+  "/:livroId/avaliacoes/:index",
+  LivroController.deleteAvaliacaoLivro
+);
 
 // Error handling
 router.use((err, req, res, next) => {
