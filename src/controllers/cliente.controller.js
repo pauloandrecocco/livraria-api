@@ -2,7 +2,7 @@
 import ClienteService from "../services/cliente.service.js";
 
 // Utils
-// import { validateId, validateCliente } from "../utils/validators.js";
+import { validateId } from "../utils/validators.js";
 
 async function createCliente(req, res, next) {
   const cliente = req.body;
@@ -30,7 +30,7 @@ async function getCliente(req, res, next) {
   const { clienteId } = req.params;
 
   try {
-    // validateId(clienteId, "Cliente");
+    validateId(clienteId, "cliente");
 
     res.send(await ClienteService.getCliente(clienteId));
     logger.info(`${req.method} ${req.baseUrl}/:id - Success`);
@@ -43,7 +43,7 @@ async function deleteCliente(req, res, next) {
   const { clienteId } = req.params;
 
   try {
-    // validateId(clienteId, "Cliente");
+    validateId(clienteId, "cliente");
 
     await ClienteService.deleteCliente(clienteId);
 
@@ -59,7 +59,7 @@ async function updateCliente(req, res, next) {
   const cliente = req.body;
 
   try {
-    // validateId(clienteId, "Cliente");
+    validateId(clienteId, "cliente");
 
     res.send(await ClienteService.updateCliente(clienteId, cliente));
     logger.info(`${req.method} ${req.baseUrl} - Success`);

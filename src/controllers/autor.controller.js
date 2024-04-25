@@ -2,7 +2,7 @@
 import AutorService from "../services/autor.service.js";
 
 // Utils
-// import { validateId, validateAutor } from "../utils/validators.js";
+import { validateId } from "../utils/validators.js";
 
 async function createAutor(req, res, next) {
   const autor = req.body;
@@ -30,7 +30,7 @@ async function getAutor(req, res, next) {
   const { autorId } = req.params;
 
   try {
-    // validateId(autorId, "Autor");
+    validateId(autorId, "autor");
 
     res.send(await AutorService.getAutor(autorId));
     logger.info(`${req.method} ${req.baseUrl}/:id - Success`);
@@ -43,7 +43,7 @@ async function deleteAutor(req, res, next) {
   const { autorId } = req.params;
 
   try {
-    // validateId(autorId, "Autor");
+    validateId(autorId, "autor");
 
     await AutorService.deleteAutor(autorId);
 
@@ -59,7 +59,7 @@ async function updateAutor(req, res, next) {
   const autor = req.body;
 
   try {
-    // validateId(autorId, "Autor");
+    validateId(autorId, "autor");
 
     res.send(await AutorService.updateAutor(autorId, autor));
     logger.info(`${req.method} ${req.baseUrl} - Success`);
